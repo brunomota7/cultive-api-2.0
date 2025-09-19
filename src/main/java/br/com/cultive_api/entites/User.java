@@ -1,6 +1,8 @@
 package br.com.cultive_api.entites;
 
+import br.com.cultive_api.dto.request.LoginRequestDto;
 import jakarta.persistence.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
 import java.util.UUID;
@@ -29,8 +31,8 @@ public class User {
     )
     private Set<Role> roles;
 
-    public boolean isLoginCorrect() {
-        return true;
+    public boolean isLoginCorrect(LoginRequestDto dto, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.matches(dto.password(), this.password);
     }
 
     public UUID getUserId() {return userId;}
