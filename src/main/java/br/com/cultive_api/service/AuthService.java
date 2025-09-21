@@ -50,7 +50,7 @@ public class AuthService {
        if (userRole == null)
            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Role not found");
 
-       if (userRole.equals(Role.Values.ADMIN))
+       if (userRole.getRoleId().equals(Role.Values.ADMIN.getRoleId()))
            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid role for registration");
 
        User user = new User();
