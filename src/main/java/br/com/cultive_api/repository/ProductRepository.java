@@ -2,6 +2,8 @@ package br.com.cultive_api.repository;
 
 import br.com.cultive_api.entites.Product;
 import br.com.cultive_api.entites.ProductCategory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,11 +24,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:priceMin IS NULL OR p.price >= :priceMin) AND" +
             "(:priceMax IS NULL OR p.price <= :priceMax)"
     )
-    List<Product> searchProducts(
+    Page<Product> searchProducts(
             @Param("name") String name,
             @Param("category") ProductCategory category,
             @Param("priceMin") Double priceMin,
-            @Param("priceMax") Double priceMax
+            @Param("priceMax") Double priceMax,
+            Pageable pageable
     );
 
 }

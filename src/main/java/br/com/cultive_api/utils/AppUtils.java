@@ -23,15 +23,21 @@ public class AppUtils {
         }
     }
 
+    public static void isFarmerOrAdmin(String scope) {
+        if (!scope.equals(Role.Values.FARMER.name()) && !scope.equals(Role.Values.ADMIN.name())) {
+            throw new BadCredentialsException("You are not authorized to make this request.");
+        }
+    }
+
     public static UUID getUserIdFromToken(JwtAuthenticationToken token) {
         String userIdStr = token.getToken().getClaimAsString("sub");
         if (userIdStr == null)
-            throw new IllegalArgumentException("Token does not contain user ID");
+            throw new BadCredentialsException("Token does not contain user ID");
 
         try {
             return UUID.fromString(userIdStr);
-        } catch (IllegalArgumentException ex) {
-            throw new IllegalArgumentException("Invalid user ID format in token");
+        } catch (BadCredentialsException ex) {
+            throw new BadCredentialsException("Invalid user ID format in token");
         }
     }
 
