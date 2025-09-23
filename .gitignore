@@ -33,7 +33,9 @@ build/
 .vscode/
 
 ## My configs ##
-/docker
+/docke
+/logs
+*.xml
 *.yml
 *.sql
 *.properties
