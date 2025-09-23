@@ -25,6 +25,7 @@ public class Product {
     private LocalDateTime registrationDate;
     private boolean available;
     private String imageUrl;
+    private LocalDateTime lastUpdate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -50,6 +51,9 @@ public class Product {
 
     public LocalDateTime getRegistrationDate() {return registrationDate;}
     public void setRegistrationDate(LocalDateTime registrationDate) {this.registrationDate = registrationDate;}
+
+    public LocalDateTime getLastUpdate() {return lastUpdate;}
+    public void setLastUpdate(LocalDateTime lastUpdate) {this.lastUpdate = lastUpdate;}
 
     public boolean isAvailable() {return available;}
     public void setAvailable(boolean available) {this.available = available;}

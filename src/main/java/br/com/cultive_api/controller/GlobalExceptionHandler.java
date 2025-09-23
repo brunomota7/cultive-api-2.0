@@ -2,6 +2,7 @@ package br.com.cultive_api.controller;
 
 import br.com.cultive_api.exception.CannotDeleteAdminException;
 import br.com.cultive_api.exception.CannotRemoveAdminRoleException;
+import br.com.cultive_api.exception.ProductNotFoundException;
 import br.com.cultive_api.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,16 @@ public class GlobalExceptionHandler {
                 "timestamp", LocalDateTime.now(),
                 "status", HttpStatus.FORBIDDEN.value(),
                 "error", "Forbidden action",
+                "message", ex.getMessage()
+        ));
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<Object> handleProductNotFound(ProductNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                "timestamp", LocalDateTime.now(),
+                "status", HttpStatus.NOT_FOUND.value(),
+                "error", "Product not found",
                 "message", ex.getMessage()
         ));
     }

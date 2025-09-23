@@ -33,6 +33,7 @@ public class ProductMapper {
         var inStocck = product.getInStock();
         var category = product.getCategory();
         var registrationDate = product.getRegistrationDate();
+        var lastUpdate = product.getLastUpdate();
         var available = product.isAvailable();
         var imageUrl = product.getImageUrl();
         var idUser = product.getUser().getUserId();
@@ -41,8 +42,18 @@ public class ProductMapper {
 
         return new ProductResponseDto(productId, name, description,
                                       price, inStocck, category,
-                                      registrationDate, available, imageUrl,
+                                      registrationDate, lastUpdate, available, imageUrl,
                                       idUser, userName, userEmail);
+    }
+
+    public static void toUpdate(CreateProductDto dto, Product productUpdate, ProductCategory category) {
+        productUpdate.setName(dto.name());
+        productUpdate.setDescription(dto.description());
+        productUpdate.setPrice(dto.price());
+        productUpdate.setInStock(dto.inStock());
+        productUpdate.setCategory(category);
+        productUpdate.setImageUrl(dto.imageUrl());
+        productUpdate.setLastUpdate(LocalDateTime.now());
     }
 
 }

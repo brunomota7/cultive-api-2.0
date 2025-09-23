@@ -14,9 +14,9 @@ import java.util.UUID;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findAllByUserUserId(UUID userId);
-    List<Product> findByAvailableTrue();
-    List<Product> findByAvailableFalse();
+    Page<Product> findAllByUserUserId(UUID userId, Pageable pageable);
+    Page<Product> findByAvailableTrue(Pageable pageable);
+    Page<Product> findByAvailableFalse(Pageable pageable);
 
     @Query("SELECT p FROM Product p WHERE " +
             "(:name IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))) AND" +
