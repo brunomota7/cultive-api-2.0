@@ -38,10 +38,7 @@ public class AdminService {
     }
 
     @Transactional
-    public void createUserAdmin(CreateUserAdminDto dto, JwtAuthenticationToken token) {
-        var scopeAdmin = AppUtils.getScopeUser(token);
-        AppUtils.isAdmin(scopeAdmin);
-
+    public void createUserAdmin(CreateUserAdminDto dto) {
         var roleAdmin = roleRepository.findByName(Role.Values.ADMIN.name());
         if (roleAdmin == null) {
             roleAdmin = new Role();
@@ -64,9 +61,6 @@ public class AdminService {
 
     @Transactional
     public void removeAdminRole(UUID targetUserId, JwtAuthenticationToken token) {
-        var scopeAdmin = AppUtils.getScopeUser(token);
-        AppUtils.isAdmin(scopeAdmin);
-
         User targetUser = userRepository.findById(targetUserId)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
@@ -88,10 +82,7 @@ public class AdminService {
         userRepository.save(targetUser);
     }
 
-    public List<UserResponseDto> getAllUsers(JwtAuthenticationToken token) {
-        var scopeAdmin = AppUtils.getScopeUser(token);
-        AppUtils.isAdmin(scopeAdmin);
-
+    public List<UserResponseDto> getAllUsers() {
         return userRepository
                 .findAll()
                 .stream()
@@ -99,10 +90,7 @@ public class AdminService {
                 .toList();
     }
 
-    public void deleteUser(UUID userId, JwtAuthenticationToken token) {
-        var scopeAdmin = AppUtils.getScopeUser(token);
-        AppUtils.isAdmin(scopeAdmin);
-
+    public void deleteUser(UUID userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 

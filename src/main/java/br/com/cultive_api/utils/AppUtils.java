@@ -12,23 +12,6 @@ public class AppUtils {
         throw new UnsupportedOperationException("Utility class, cannot be instantiated");
     }
 
-    public static String getScopeUser(JwtAuthenticationToken token) {
-        var scope = token.getAuthorities().stream().findFirst().get().getAuthority();
-        return scope;
-    }
-
-    public static void isAdmin(String scopeAdmin) {
-        if (scopeAdmin.equals(Role.Values.ADMIN.name())) {
-            throw new BadCredentialsException("You are not authorized to make this request.");
-        }
-    }
-
-    public static void isFarmerOrAdmin(String scope) {
-        if (!scope.equals(Role.Values.FARMER.name()) && !scope.equals(Role.Values.ADMIN.name())) {
-            throw new BadCredentialsException("You are not authorized to make this request.");
-        }
-    }
-
     public static UUID getUserIdFromToken(JwtAuthenticationToken token) {
         String userIdStr = token.getToken().getClaimAsString("sub");
         if (userIdStr == null)

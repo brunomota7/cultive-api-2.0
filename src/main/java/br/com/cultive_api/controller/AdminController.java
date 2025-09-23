@@ -23,10 +23,9 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<Void> addNewAdmin(@RequestBody CreateUserAdminDto dto,
-                                            JwtAuthenticationToken token) {
-        adminService.createUserAdmin(dto, token);
+    @PostMapping("/register-admin")
+    public ResponseEntity<Void> addNewAdmin(@RequestBody CreateUserAdminDto dto) {
+        adminService.createUserAdmin(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -38,15 +37,14 @@ public class AdminController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<UserResponseDto>> getAllUsers(JwtAuthenticationToken token) {
-        List<UserResponseDto> listUsers = adminService.getAllUsers(token);
+    public ResponseEntity<List<UserResponseDto>> getAllUsers() {
+        List<UserResponseDto> listUsers = adminService.getAllUsers();
         return ResponseEntity.ok(listUsers);
     }
 
     @DeleteMapping("/user/{userId}")
-    public ResponseEntity<Void> deleteUserById(@PathVariable UUID userId,
-                                               JwtAuthenticationToken token) {
-        adminService.deleteUser(userId, token);
+    public ResponseEntity<Void> deleteUserById(@PathVariable UUID userId) {
+        adminService.deleteUser(userId);
         return ResponseEntity.ok().build();
     }
 
