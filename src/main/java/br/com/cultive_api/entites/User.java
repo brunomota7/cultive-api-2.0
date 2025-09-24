@@ -31,6 +31,9 @@ public class User {
     )
     private Set<Role> roles;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Address address;
+
     public boolean isLoginCorrect(LoginRequestDto dto, PasswordEncoder passwordEncoder) {
         return passwordEncoder.matches(dto.password(), this.password);
     }
@@ -50,4 +53,6 @@ public class User {
     public Set<Role> getRoles() {return roles;}
     public void setRoles(Set<Role> roles) {this.roles = roles;}
 
+    public Address getAddress() {return address;}
+    public void setAddress(Address address) {this.address = address;}
 }

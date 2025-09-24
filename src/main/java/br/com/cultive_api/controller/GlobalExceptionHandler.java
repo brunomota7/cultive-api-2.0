@@ -1,9 +1,6 @@
 package br.com.cultive_api.controller;
 
-import br.com.cultive_api.exception.CannotDeleteAdminException;
-import br.com.cultive_api.exception.CannotRemoveAdminRoleException;
-import br.com.cultive_api.exception.ProductNotFoundException;
-import br.com.cultive_api.exception.UserNotFoundException;
+import br.com.cultive_api.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -51,6 +48,16 @@ public class GlobalExceptionHandler {
                 "timestamp", LocalDateTime.now(),
                 "status", HttpStatus.NOT_FOUND.value(),
                 "error", "Product not found",
+                "message", ex.getMessage()
+        ));
+    }
+
+    @ExceptionHandler(AddressNotFoundException.class)
+    public ResponseEntity<Object> handleAddressNotFound(AddressNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                "timestamp", LocalDateTime.now(),
+                "status", HttpStatus.NOT_FOUND.value(),
+                "error", "Address not found",
                 "message", ex.getMessage()
         ));
     }

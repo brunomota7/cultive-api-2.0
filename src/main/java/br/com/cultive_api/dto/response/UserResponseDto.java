@@ -1,5 +1,6 @@
 package br.com.cultive_api.dto.response;
 
+import br.com.cultive_api.entites.Address;
 import br.com.cultive_api.entites.Role;
 
 import java.util.Set;
