@@ -16,7 +16,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequestMapping("admin")
-@PreAuthorize("hasRole('SCOPE_ADMIN')")
+@PreAuthorize("hasAuthority('SCOPE_ADMIN')")
 public class AdminController {
 
     private AdminService adminService;

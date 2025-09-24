@@ -26,7 +26,7 @@ public class ProductController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('SCOPE_FARMER') or hasRole('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_FARMER') or hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Void> createNewProduct(@RequestBody CreateProductDto dto,
                                                  JwtAuthenticationToken token) {
         log.info("POST /product - Starting product creation request");
@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     @GetMapping("/my")
-    @PreAuthorize("hasRole('SCOPE_FARMER') or hasRole('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_FARMER') or hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Page<ProductResponseDto>> getAllMyProducts(
             @PageableDefault(page = 1, size = 5, sort = "name") Pageable pageable,
             JwtAuthenticationToken token
@@ -73,7 +73,7 @@ public class ProductController {
     }
 
     @GetMapping("/available")
-    @PreAuthorize("hasRole('SCOPE_FARMER') or hasRole('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_FARMER') or hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Page<ProductResponseDto>> listAvailableProductsTrue(
             @PageableDefault(page = 1, size = 5, sort = "name") Pageable pageable
     ) {
@@ -84,7 +84,7 @@ public class ProductController {
     }
 
     @GetMapping("/no-available")
-    @PreAuthorize("hasRole('SCOPE_FARMER') or hasRole('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_FARMER') or hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Page<ProductResponseDto>> listAvailabelProductsFalse(
             @PageableDefault(page = 1, size = 5, sort = "name") Pageable pageable
     ) {
@@ -95,7 +95,7 @@ public class ProductController {
     }
 
     @PatchMapping("/{productId}/availability")
-    @PreAuthorize("hasRole('SCOPE_FARMER') or hasRole('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_FARMER') or hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Void> changeAvailability(
             @PathVariable Long productId, @RequestParam boolean available
     ) {
@@ -106,7 +106,7 @@ public class ProductController {
     }
 
     @PutMapping("/update/{productId}")
-    @PreAuthorize("hasRole('SCOPE_FARMER') or hasRole('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_FARMER') or hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Void> updateInfoProduct(
             @PathVariable Long productId,
             @RequestBody CreateProductDto dto
@@ -118,7 +118,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{productId}")
-    @PreAuthorize("hasRole('SCOPE_FARMER') or hasRole('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_FARMER') or hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
         log.warn("DELETE /product/delete/{} - Starting request to delete product", productId);
         productService.deleteProduct(productId);
