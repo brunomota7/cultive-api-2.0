@@ -72,4 +72,14 @@ public class GlobalExceptionHandler {
         ));
     }
 
+    @ExceptionHandler(HarvestNotFoundException.class)
+    public ResponseEntity<Object> handleHarvestNotFound(HarvestNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                "timestamp", LocalDateTime.now(),
+                "status", HttpStatus.NOT_FOUND.value(),
+                "error", "Planting not found",
+                "message", ex.getMessage()
+        ));
+    }
+
 }

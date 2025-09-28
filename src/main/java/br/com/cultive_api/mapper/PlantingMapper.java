@@ -5,6 +5,8 @@ import br.com.cultive_api.dto.response.PlantingResponseDto;
 import br.com.cultive_api.entites.Planting;
 import br.com.cultive_api.entites.User;
 
+import java.time.LocalDateTime;
+
 public class PlantingMapper {
 
     public static Planting toEntity(CreatePlantingDto dto, User user) {
@@ -24,17 +26,19 @@ public class PlantingMapper {
         var datePlanting = planting.getDatePlanting();
         var areaHectares = planting.getAreaHectares();
         var harvested = planting.isHarvested();
+        var lastUpdate = planting.getLastUpdate();
         var userId = planting.getUser().getUserId();
         var username = planting.getUser().getName();
 
         return new PlantingResponseDto(plantingId, culture, datePlanting,
-                                      areaHectares, harvested, userId, username);
+                                      areaHectares, harvested, lastUpdate, userId, username);
     }
 
     public static void toUpdate(CreatePlantingDto dto, Planting updatePlanting) {
         updatePlanting.setCulture(dto.culture());
         updatePlanting.setDatePlanting(dto.datePlanting());
         updatePlanting.setAreaHectares(dto.areaHectares());
+        updatePlanting.setLastUpdate(LocalDateTime.now());
     }
 
 }

@@ -2,6 +2,7 @@ package br.com.cultive_api.entites;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -17,6 +18,7 @@ public class Planting {
     private LocalTime datePlanting;
     private double areaHectares;
     private boolean harvested;
+    private LocalDateTime lastUpdate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -36,6 +38,9 @@ public class Planting {
 
     public boolean isHarvested() {return harvested;}
     public void setHarvested(boolean harvested) {this.harvested = harvested;}
+
+    public LocalDateTime getLastUpdate() {return lastUpdate;}
+    public void setLastUpdate(LocalDateTime lastUpdate) {this.lastUpdate = lastUpdate;}
 
     public User getUser() {return user;}
     public void setUser(User user) {this.user = user;}

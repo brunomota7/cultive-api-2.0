@@ -3,6 +3,7 @@ package br.com.cultive_api.entites;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_harvests")
@@ -16,6 +17,8 @@ public class Harvest {
     private LocalDate harvestDate;
     private Double quantHarvestedKg;
     private Double amountLodtKg;
+
+    private LocalDateTime lastUpdate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -32,6 +35,9 @@ public class Harvest {
 
     public Double getAmountLodtKg() {return amountLodtKg;}
     public void setAmountLodtKg(Double amountLodtKg) {this.amountLodtKg = amountLodtKg;}
+
+    public LocalDateTime getLastUpdate() {return lastUpdate;}
+    public void setLastUpdate(LocalDateTime lastUpdate) {this.lastUpdate = lastUpdate;}
 
     public User getUser() {return user;}
     public void setUser(User user) {this.user = user;}
