@@ -62,4 +62,14 @@ public class GlobalExceptionHandler {
         ));
     }
 
+    @ExceptionHandler(PlantingNotFoundException.class)
+    public ResponseEntity<Object> handlePlantingNotFound(PlantingNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                "timestamp", LocalDateTime.now(),
+                "status", HttpStatus.NOT_FOUND.value(),
+                "error", "Planting not found",
+                "message", ex.getMessage()
+        ));
+    }
+
 }
